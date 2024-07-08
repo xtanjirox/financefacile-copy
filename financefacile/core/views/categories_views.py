@@ -1,9 +1,7 @@
 from django.views.generic import CreateView, UpdateView
 from django.urls import reverse_lazy
 
-from core import models
-from core import tables
-from core import filters
+from core import models, tables, filters
 
 from .base import BaseListView, FormViewMixin, BaseDeleteView
 

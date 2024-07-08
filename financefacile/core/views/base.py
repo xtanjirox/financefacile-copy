@@ -1,10 +1,11 @@
 from django_tables2 import SingleTableView
-from core import forms
-from django.views import generic
 from django.forms import modelform_factory
-from django.db.models import F, Q
-from core import models
-from django.db.models import Sum
+
+from django.views import generic
+
+from django.db.models import F, Q, Sum
+
+from core import forms, models
 
 import random
 import json

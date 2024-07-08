@@ -3,15 +3,17 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import *
 from django.views.generic import TemplateView
 from django.conf import settings
-from core import models
-import json
+
 from django.db.models.functions import ExtractMonth, ExtractYear, Concat
-from django.db.models import IntegerField, Sum
+from django.db.models import Sum, Func, CharField
+
+from django.core.exceptions import ObjectDoesNotExist
+
+from core import models
+
 from datetime import datetime, timedelta
 
-from django.db.models import Func, CharField
-from django.db.models.functions import Cast
-from django.core.exceptions import ObjectDoesNotExist
+import json
 
 
 class MonthName(Func):
@@ -43,13 +45,13 @@ def generate_stat_by_entry_type(queryset, entry_type, ls_month_year):
 
 
 def home(request):
-    total_charge = sum(
-        models.FinanceEntry.objects.filter(finance_entry_type=models.EntryType.CHARGE).values_list('entry_value',
-                                                                                                   flat=True))
+    total_charge = sum(models.FinanceEntry.objects.filter(
+        finance_entry_type=models.EntryType.CHARGE
+    ).values_list('entry_value', flat=True))
 
-    total_revenue = sum(
-        models.FinanceEntry.objects.filter(finance_entry_type=models.EntryType.REVENUE).values_list('entry_value',
-                                                                                                    flat=True))
+    total_revenue = sum(models.FinanceEntry.objects.filter(
+        finance_entry_type=models.EntryType.REVENUE
+    ).values_list('entry_value', flat=True))
 
     qs_stats = models.FinanceEntry.objects.all().annotate(
         month=ExtractMonth("entry_date"),
@@ -80,7 +82,7 @@ def home(request):
     context = {
         'total_charge': total_charge,
         'total_revenue': total_revenue,
-        'total_marge': total_revenue-total_charge,
+        'total_marge': total_revenue - total_charge,
         'data': json.dumps(stats),
         'table': models.FinanceEntry.objects.all().order_by('-entry_date')[:8],
         'ls_stats': [total_revenue, total_charge],
