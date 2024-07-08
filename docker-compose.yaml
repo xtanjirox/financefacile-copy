@@ -25,3 +25,14 @@ services:
       - postgres_db
     ports:
       - "8000:8000"
+
+  ngrok:
+    image: ngrok/ngrok:alpine
+    environment:
+      NGROK_AUTHTOKEN: '2OPNvZ7NuYdrMX8arGYAuEm8pVj_5vximWpJdXRKaaxhwEaiK'
+    command: 'http --domain=gopher-known-collie.ngrok-free.app financefacile:8000'
+    ports:
+      - '4040:4040'
+    expose:
+      - '4040'
+
