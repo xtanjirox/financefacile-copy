@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from core import models, tables, filters
 
 from .base import BaseListView, FormViewMixin, BaseDeleteView
+from django_select2 import forms as s2forms
 
 
 class FianceEntryListView(BaseListView):
@@ -24,6 +25,15 @@ class FianceEntryCreateView(CreateView, FormViewMixin):
     segment = 'entries'
     success_url = reverse_lazy('entry-list')
 
+    widgets = {
+        'finance_entry_type': s2forms.Select2Widget(choices=models.EntryType),
+        'entry_category': s2forms.ModelSelect2Widget(
+            model=models.EntryCategory,
+            search_fields=['category_title__icontains'],
+            attr={"id": "js-example-basic-single"}
+        )
+    }
+
 
 class FianceEntryUpdateView(UpdateView, FormViewMixin):
     model = models.FinanceEntry
@@ -31,6 +41,15 @@ class FianceEntryUpdateView(UpdateView, FormViewMixin):
     fields = '__all__'
     segment = 'entries'
     success_url = reverse_lazy('entry-list')
+
+    widgets = {
+        'finance_entry_type': s2forms.Select2Widget(choices=models.EntryType),
+        'entry_category': s2forms.ModelSelect2Widget(
+            model=models.EntryCategory,
+            search_fields=['category_title__icontains'],
+            attr={"id": "js-example-basic-single"}
+        )
+    }
 
 
 class FianceEntryDeleteView(BaseDeleteView):

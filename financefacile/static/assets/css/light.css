@@ -26908,7 +26908,7 @@ div.dtb-popover-close {
     right: 10px;
     text-align: center;
     top: 10px;
-    width: 22px;
+    width: 100%;
     z-index: 2003
 }
 
@@ -27485,7 +27485,7 @@ div.dtr-modal div.dtr-modal-close {
     right: 6px;
     text-align: center;
     top: 6px;
-    width: 22px;
+    width: 100%;
     z-index: 12
 }
 

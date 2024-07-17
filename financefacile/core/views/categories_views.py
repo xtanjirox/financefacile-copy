@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from core import models, tables, filters
 
 from .base import BaseListView, FormViewMixin, BaseDeleteView
+from django_select2 import forms as s2forms
 
 
 class CategoryListView(BaseListView):
@@ -23,12 +24,20 @@ class CategoryCreateView(CreateView, FormViewMixin):
     segment = 'categories'
     success_url = reverse_lazy('category-list')
 
+    widgets = {
+        'finance_entry_type': s2forms.Select2Widget(choices=models.EntryType),
+    }
+
 
 class CategoryUpdateView(UpdateView, FormViewMixin):
     model = models.EntryCategory
     template_name = 'generic/detail.html'
     fields = '__all__'
     segment = 'categories'
+
+    widgets = {
+        'finance_entry_type': s2forms.Select2Widget(choices=models.EntryType),
+    }
 
 
 class CategoryDeleteView(BaseDeleteView):

@@ -113,3 +113,4 @@ class LogoutView(TemplateView):
         logout(request)
 
         return render(request, self.template_name)
+

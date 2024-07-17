@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 from django.utils import timezone
 from django.urls import reverse_lazy
 from datetime import datetime
@@ -50,3 +52,5 @@ class FinanceEntry(models.Model):
     @property
     def month_year(self):
         return datetime(self.entry_date.year, self.entry_date.month, 1).strftime("%B%Y")
+
+

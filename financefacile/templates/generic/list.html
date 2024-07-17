@@ -119,18 +119,26 @@
                         </div>
                     </div>
 
-                    <table class="table mb-0">
-                        <tbody>
-                        <tr>
-                            <td>Revenue</td>
-                            <td class="text-end">{{ ls_stats.0 }}</td>
-                        </tr>
-                        <tr>
-                            <td>Charges</td>
-                            <td class="text-end">{{ ls_stats.1 }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <a data-bs-target="#multi-2" data-bs-toggle="collapse" class="collapsed" aria-expanded="false" style="float: right; color:Black;">
+                            More Details <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-corner-right-down align-middle"><polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path></svg>
+                    </a>
+
+                    <ul id="multi-2" class="sidebar-dropdown list-unstyled collapse" style="">
+                        <li class="sidebar-item">
+                            <table class="table mb-0">
+                                <tbody>
+                                <tr>
+                                    <td>Revenue</td>
+                                    <td class="text-end">{{ ls_stats.0 }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Charges</td>
+                                    <td class="text-end">{{ ls_stats.1 }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -148,17 +156,24 @@
                             <canvas id="chartjs-dashboard-pie2"></canvas>
                         </div>
                     </div>
+                    <a data-bs-target="#multi-3" data-bs-toggle="collapse" class="collapsed" aria-expanded="false" style="float: right; color:Black;">
+                            More Details <svg xmlns="http://www.w3.org/2000/svg"  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-corner-right-down align-middle"><polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path></svg>
+                    </a>
 
-                    <table class="table mb-0">
-                        <tbody>
-                        {% for item in pie_charge %}
-                        <tr>
-                            <td>{{ item.category_name }}</td>
-                            <td class="text-end">{{ item.total_sum }}</td>
-                        </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                    <ul id="multi-3" class="sidebar-dropdown list-unstyled collapse" style="">
+                        <li class="sidebar-item">
+                            <table class="table mb-0">
+                                <tbody>
+                                {% for item in pie_charge %}
+                                <tr>
+                                    <td>{{ item.category_name }}</td>
+                                    <td class="text-end">{{ item.total_sum }}</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

@@ -84,7 +84,7 @@
 
 .selector ul.selector-chooser {
     align-self: center;
-    width: 22px;
+    width: 100%;
     background-color: var(--selected-bg);
     border-radius: 10px;
     margin: 0;
