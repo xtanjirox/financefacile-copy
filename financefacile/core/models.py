@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 from django.utils import timezone
 from django.urls import reverse_lazy
@@ -19,7 +18,14 @@ class EntryCategory(models.Model):
         db_table = 'entry_category'
         verbose_name_plural = 'categories'
 
+
     def __str__(self):
+        """
+        Returns a string representation of the object.
+
+        :return: A string representing the category title of the object.
+        :rtype: str
+        """
         return self.category_title
 
     def get_absolute_url(self):
