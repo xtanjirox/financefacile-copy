@@ -18,9 +18,17 @@ class FinanceEntryFilter(django_filters.FilterSet):
         }
         ))
 
+    season = django_filters.ModelMultipleChoiceFilter(
+        queryset=models.SeasonEntry.objects.all(),
+        widget=s2forms.Select2MultipleWidget(attrs={
+            "data-live-search": "true",
+            "class": "form-control selectpicker form-select"
+        }
+        ))
+
     class Meta:
         model = models.FinanceEntry
-        fields = ['entry_date', 'entry_category']
+        fields = ['entry_date', 'entry_category', 'season']
 
 
 class EntryCategoryFilter(django_filters.FilterSet):

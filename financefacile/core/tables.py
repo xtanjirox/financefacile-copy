@@ -21,7 +21,7 @@ class EntriesTable(tables.Table):
     class Meta:
         model = models.FinanceEntry
         attrs = DEFAULT_TABLE_ATTRS
-        fields = ('entry_label', 'entry_category', 'finance_entry_type', 'entry_value', 'entry_date')
+        fields = ('entry_label', 'entry_category', 'finance_entry_type', 'entry_value', 'entry_date', 'season')
 
 
 class EntryCategoryTable(tables.Table):

@@ -93,15 +93,24 @@ class FormViewMixin(generic.FormView):
     exclude = None
     readonly_fields = []
     segment = None
+    reorder_date_fields = False
+
+    def get_read_only_fields(self,form):
+        for field in self.readonly_fields:
+            form.fields[field].widget.attrs['readonly'] = True
+        for field in self.attrs.keys():
+            form.fields[field].widget.attrs.update(self.attrs[field])
+        return form
 
     def get_form(self, form_class=None):
         if form_class is None:
-            form_class = modelform_factory(
-                self.model, fields=self.fields, exclude=self.exclude, widgets=self.widgets
-            )
+            form_class = modelform_factory(self.model, fields=self.fields, exclude=self.exclude, widgets=self.widgets)
         form = super().get_form(form_class=form_class)
         form.helper = forms.FormHelper()
         form.helper.form_tag = False
+        form = self.get_read_only_fields(form)
+        if self.reorder_date_fields:
+            form = self._reorder_date_fields(form)
         return form
 
     def get_context_data(self, **kwargs):

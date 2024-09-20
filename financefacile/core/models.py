@@ -11,6 +11,25 @@ class EntryType(models.IntegerChoices):
     REVENUE = 2, 'REVENUE'
 
 
+class SeasonEntry(models.Model):
+    season_name = models.CharField(max_length=50)
+    season_start = models.DateField()
+    season_end = models.DateField()
+
+    class Meta:
+        db_table = 'season_entry'
+        verbose_name_plural = 'seasons'
+
+    def __str__(self):
+        return self.season_name
+
+    def get_absolute_url(self):
+        return reverse_lazy('category-update', kwargs={'pk': self.pk})
+
+    def get_delete_url(self):
+        return reverse_lazy('category-delete', kwargs={"pk": self.pk})
+
+
 class EntryCategory(models.Model):
     category_title = models.CharField(max_length=50)
     finance_entry_type = models.IntegerField(choices=EntryType.choices)
@@ -35,6 +54,7 @@ class FinanceEntry(models.Model):
     entry_value = models.FloatField(default=0)
     entry_label = models.CharField(max_length=20)
     entry_date = models.DateField(default=timezone.now())
+    season = models.ForeignKey(SeasonEntry, on_delete=models.DO_NOTHING)
 
     class Meta:
         db_table = 'finance_entries'
@@ -52,5 +72,3 @@ class FinanceEntry(models.Model):
     @property
     def month_year(self):
         return datetime(self.entry_date.year, self.entry_date.month, 1).strftime("%B%Y")
-
-
